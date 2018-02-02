@@ -315,7 +315,7 @@ function farm_inventory_views_default_views() {
     'timestamp' => 'timestamp',
     'name' => 'name',
     'field_farm_inventory_asset' => 'field_farm_inventory_asset',
-    'field_farm_inventory_value' => 'field_farm_inventory_value',
+    'field_farm_quantity_value' => 'field_farm_quantity_value',
     'type' => 'type',
     'field_farm_log_category' => 'field_farm_log_category',
     'field_farm_log_owner' => 'field_farm_log_owner',
@@ -362,7 +362,7 @@ function farm_inventory_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_farm_inventory_value' => array(
+    'field_farm_quantity_value' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -400,13 +400,13 @@ function farm_inventory_views_default_views() {
   $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
   $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
   $handler->display->display_options['empty']['area_text_custom']['content'] = 'No logs of inventory adjustments found.';
-  /* Relationship: Log: Inventory adjustments (field_farm_inventory) */
-  $handler->display->display_options['relationships']['field_farm_inventory_value']['id'] = 'field_farm_inventory_value';
-  $handler->display->display_options['relationships']['field_farm_inventory_value']['table'] = 'field_data_field_farm_inventory';
-  $handler->display->display_options['relationships']['field_farm_inventory_value']['field'] = 'field_farm_inventory_value';
-  $handler->display->display_options['relationships']['field_farm_inventory_value']['label'] = 'field_farm_inventory';
-  $handler->display->display_options['relationships']['field_farm_inventory_value']['required'] = TRUE;
-  $handler->display->display_options['relationships']['field_farm_inventory_value']['delta'] = '-1';
+  /* Relationship: Field: Quantity (field_farm_quantity) */
+  $handler->display->display_options['relationships']['field_farm_quantity_value']['id'] = 'field_farm_quantity_value';
+  $handler->display->display_options['relationships']['field_farm_quantity_value']['table'] = 'field_data_field_farm_quantity';
+  $handler->display->display_options['relationships']['field_farm_quantity_value']['field'] = 'field_farm_quantity_value';
+  $handler->display->display_options['relationships']['field_farm_quantity_value']['label'] = 'field_farm_quantity';
+  $handler->display->display_options['relationships']['field_farm_quantity_value']['required'] = TRUE;
+  $handler->display->display_options['relationships']['field_farm_quantity_value']['delta'] = '-1';
   /* Field: Bulk operations: Log */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'views_entity_log';
@@ -492,19 +492,19 @@ function farm_inventory_views_default_views() {
   $handler->display->display_options['fields']['field_farm_inventory_asset']['id'] = 'field_farm_inventory_asset';
   $handler->display->display_options['fields']['field_farm_inventory_asset']['table'] = 'field_data_field_farm_inventory_asset';
   $handler->display->display_options['fields']['field_farm_inventory_asset']['field'] = 'field_farm_inventory_asset';
-  $handler->display->display_options['fields']['field_farm_inventory_asset']['relationship'] = 'field_farm_inventory_value';
+  $handler->display->display_options['fields']['field_farm_inventory_asset']['relationship'] = 'field_farm_quantity_value';
   $handler->display->display_options['fields']['field_farm_inventory_asset']['settings'] = array(
     'bypass_access' => 0,
     'link' => 1,
   );
-  /* Field: Field collection item: Value */
-  $handler->display->display_options['fields']['field_farm_inventory_value']['id'] = 'field_farm_inventory_value';
-  $handler->display->display_options['fields']['field_farm_inventory_value']['table'] = 'field_data_field_farm_inventory_value';
-  $handler->display->display_options['fields']['field_farm_inventory_value']['field'] = 'field_farm_inventory_value';
-  $handler->display->display_options['fields']['field_farm_inventory_value']['relationship'] = 'field_farm_inventory_value';
-  $handler->display->display_options['fields']['field_farm_inventory_value']['label'] = 'Adjustment value';
-  $handler->display->display_options['fields']['field_farm_inventory_value']['type'] = 'fraction_decimal';
-  $handler->display->display_options['fields']['field_farm_inventory_value']['settings'] = array(
+  /* Field: Field: Value */
+  $handler->display->display_options['fields']['field_farm_quantity_value']['id'] = 'field_farm_quantity_value';
+  $handler->display->display_options['fields']['field_farm_quantity_value']['table'] = 'field_data_field_farm_quantity_value';
+  $handler->display->display_options['fields']['field_farm_quantity_value']['field'] = 'field_farm_quantity_value';
+  $handler->display->display_options['fields']['field_farm_quantity_value']['relationship'] = 'field_farm_quantity_value';
+  $handler->display->display_options['fields']['field_farm_quantity_value']['label'] = 'Adjustment value';
+  $handler->display->display_options['fields']['field_farm_quantity_value']['type'] = 'fraction_decimal';
+  $handler->display->display_options['fields']['field_farm_quantity_value']['settings'] = array(
     'precision' => '0',
     'auto_precision' => 1,
     'prefix_suffix' => 1,
@@ -552,7 +552,7 @@ function farm_inventory_views_default_views() {
   $handler->display->display_options['arguments']['field_farm_inventory_asset_target_id']['id'] = 'field_farm_inventory_asset_target_id';
   $handler->display->display_options['arguments']['field_farm_inventory_asset_target_id']['table'] = 'field_data_field_farm_inventory_asset';
   $handler->display->display_options['arguments']['field_farm_inventory_asset_target_id']['field'] = 'field_farm_inventory_asset_target_id';
-  $handler->display->display_options['arguments']['field_farm_inventory_asset_target_id']['relationship'] = 'field_farm_inventory_value';
+  $handler->display->display_options['arguments']['field_farm_inventory_asset_target_id']['relationship'] = 'field_farm_quantity_value';
   $handler->display->display_options['arguments']['field_farm_inventory_asset_target_id']['title_enable'] = TRUE;
   $handler->display->display_options['arguments']['field_farm_inventory_asset_target_id']['title'] = '%1\'s inventory adjustments';
   $handler->display->display_options['arguments']['field_farm_inventory_asset_target_id']['default_argument_type'] = 'fixed';
@@ -561,6 +561,13 @@ function farm_inventory_views_default_views() {
   $handler->display->display_options['arguments']['field_farm_inventory_asset_target_id']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['field_farm_inventory_asset_target_id']['specify_validation'] = TRUE;
   $handler->display->display_options['arguments']['field_farm_inventory_asset_target_id']['validate']['type'] = 'farm_asset';
+  /* Filter criterion: Field collection item: Asset (field_farm_inventory_asset) */
+  $handler->display->display_options['filters']['field_farm_inventory_asset_target_id']['id'] = 'field_farm_inventory_asset_target_id';
+  $handler->display->display_options['filters']['field_farm_inventory_asset_target_id']['table'] = 'field_data_field_farm_inventory_asset';
+  $handler->display->display_options['filters']['field_farm_inventory_asset_target_id']['field'] = 'field_farm_inventory_asset_target_id';
+  $handler->display->display_options['filters']['field_farm_inventory_asset_target_id']['relationship'] = 'field_farm_quantity_value';
+  $handler->display->display_options['filters']['field_farm_inventory_asset_target_id']['operator'] = 'not empty';
+  $handler->display->display_options['filters']['field_farm_inventory_asset_target_id']['group'] = 1;
   /* Filter criterion: Log: Name */
   $handler->display->display_options['filters']['name']['id'] = 'name';
   $handler->display->display_options['filters']['name']['table'] = 'log';
@@ -685,7 +692,7 @@ function farm_inventory_views_default_views() {
     t('last »'),
     t('This lists all logs that include asset inventory adjustments. If a log contains more than one inventory adjustment, it will be listed more than once in this list. Multiple log types are included in this list, and are specified in the "Log type" column.'),
     t('No logs of inventory adjustments found.'),
-    t('field_farm_inventory'),
+    t('field_farm_quantity'),
     t('Log'),
     t('- Choose an operation -'),
     t('Done'),
