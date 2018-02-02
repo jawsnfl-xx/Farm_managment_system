@@ -10,7 +10,7 @@
  */
 function farm_inventory_views_data() {
 
-  // Describe the {ffarm_inventory_asset_type} table to Views.
+  // Describe the {farm_inventory_asset_type} table to Views.
   $data['farm_inventory_asset_type']['table']['group'] = t('Inventory asset type');
 
   // Create an implicit relationship to the farm_asset_type table, so that it's
@@ -41,7 +41,7 @@ function farm_inventory_views_data() {
     ),
   );
 
-  // Inventory enabled.
+  // Asset is individual.
   $data['farm_inventory_asset_type']['individual'] = array(
     'title' => t('Asset is individual'),
     'help' => t('Whether or not to treat assets as individuals if inventory adjustments are not available.'),
