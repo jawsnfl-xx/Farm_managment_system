@@ -90,6 +90,11 @@ function farm_inventory_views_default_views() {
   $handler->display->display_options['fields']['entityreference_view_widget']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['entityreference_view_widget']['ervw']['force_single'] = 1;
   $handler->display->display_options['fields']['entityreference_view_widget']['ervw']['label_display'] = 'after';
+  /* Field: Farm asset: Asset inventory value */
+  $handler->display->display_options['fields']['inventory']['id'] = 'inventory';
+  $handler->display->display_options['fields']['inventory']['table'] = 'farm_asset';
+  $handler->display->display_options['fields']['inventory']['field'] = 'inventory';
+  $handler->display->display_options['fields']['inventory']['label'] = 'Current inventory';
   /* Field: Farm asset: Farm asset type */
   $handler->display->display_options['fields']['type']['id'] = 'type';
   $handler->display->display_options['fields']['type']['table'] = 'farm_asset';
@@ -204,6 +209,7 @@ function farm_inventory_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'entityreference_view_widget' => 'entityreference_view_widget',
+    'inventory' => 'inventory',
     'type' => 'type',
     'field_farm_move_to' => 'field_farm_move_to',
     'field_farm_group' => 'field_farm_group',
@@ -211,6 +217,13 @@ function farm_inventory_views_default_views() {
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
     'entityreference_view_widget' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'inventory' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -257,6 +270,7 @@ function farm_inventory_views_default_views() {
     t('Latest movement'),
     t('Group membership'),
     t('Farm asset entity referenced from field_farm_group'),
+    t('Current inventory'),
     t('Asset type'),
     t('Location'),
     t('Group'),
