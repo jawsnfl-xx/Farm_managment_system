@@ -528,6 +528,18 @@ function farm_log_query($time = REQUEST_TIME, $done = TRUE, $single = TRUE) {
 
   // If $time is not zero, limit to only logs before it. This allows the
   // absolute last log to be found by setting $time to zero.
+  /**
+   * @todo
+   * This prevents caching Views (ie: asset geojson), because they generate
+   * cache IDs based on the query - and with an ever-changing timestamp in the
+   * query, this just continually creates new cache IDs and never loads from
+   * previous cache. This can be proven by setting $time to a fixed timestamp
+   * here. For example:
+   *
+   * $time = 1517270400;
+   *
+   * @see https://www.drupal.org/project/farm/issues/2940697#comment-12458272
+   */
   if ($time !== 0) {
     $query->where('ss_log.timestamp <= ' . $time);
   }
