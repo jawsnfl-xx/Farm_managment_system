@@ -247,32 +247,6 @@ function farm_livestock_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
-  $field_group->identifier = 'group_farm_inventory|log|farm_medical|form';
-  $field_group->group_name = 'group_farm_inventory';
-  $field_group->entity_type = 'log';
-  $field_group->bundle = 'farm_medical';
-  $field_group->mode = 'form';
-  $field_group->parent_name = 'group_farm_tabs';
-  $field_group->data = array(
-    'label' => 'Inventory',
-    'weight' => '3',
-    'children' => array(
-      0 => 'field_farm_inventory',
-    ),
-    'format_type' => 'field_group_easy_responsive_tabs_nav_item',
-    'format_settings' => array(
-      'formatter' => '',
-      'instance_settings' => array(
-        'classes' => 'group-farm-inventory field-group-field_group_easy_responsive_tabs_nav_item',
-        'required_fields' => 1,
-      ),
-    ),
-  );
-  $field_groups['group_farm_inventory|log|farm_medical|form'] = $field_group;
-
-  $field_group = new stdClass();
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
-  $field_group->api_version = 1;
   $field_group->identifier = 'group_farm_lineage|farm_asset|animal|form';
   $field_group->group_name = 'group_farm_lineage';
   $field_group->entity_type = 'farm_asset';
@@ -375,8 +349,7 @@ function farm_livestock_field_group_info() {
     'children' => array(
       0 => 'group_farm_files',
       1 => 'group_farm_general',
-      2 => 'group_farm_inventory',
-      3 => 'group_farm_movement',
+      2 => 'group_farm_movement',
     ),
     'format_type' => 'field_group_easy_responsive_tabs_nav',
     'format_settings' => array(
@@ -406,7 +379,6 @@ function farm_livestock_field_group_info() {
   t('General');
   t('Identification');
   t('Individual');
-  t('Inventory');
   t('Lineage');
   t('Movement');
   t('Tabs');
