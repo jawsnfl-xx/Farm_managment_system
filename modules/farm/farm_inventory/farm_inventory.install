@@ -39,3 +39,119 @@ function farm_inventory_schema() {
   );
   return $schema;
 }
+
+/**
+ * Migrate inventory data to quantity fields.
+ */
+function farm_inventory_update_7000(&$sandbox) {
+
+  // Load all inventory adjustment records.
+  $result = db_query("SELECT *
+    FROM {field_data_field_farm_inventory} i
+    LEFT JOIN {field_data_field_farm_inventory_asset} a ON i.field_farm_inventory_value = a.entity_id AND a.entity_type = 'field_collection_item'
+    LEFT JOIN {field_data_field_farm_inventory_value} v ON i.field_farm_inventory_value = v.entity_id AND v.entity_type = 'field_collection_item'
+    WHERE entity_type = 'log' AND deleted = 0")->fetchAll();
+
+  // Iterate through the records.
+  foreach ($result as $record) {
+
+    // Create a new quantity field collection item.
+    $fc_id = db_insert('field_collection_item')
+      ->fields(array(
+        'revision_id' => 0,
+        'field_name' => 'field_farm_quantity',
+        'archived' => 0,
+      ))
+      ->execute();
+    $fc_rev_id = db_insert('field_collection_item_revision')
+      ->fields(array(
+        'item_id' => $fc_id,
+      ))
+      ->execute();
+    db_update('field_collection_item')
+      ->fields(array(
+        'revision_id' => $fc_rev_id,
+      ))
+      ->condition('item_id', $fc_id)
+      ->execute();
+
+    // Create records for the quantity value.
+    $value_fields = array(
+      'entity_type' => 'field_collection_item',
+      'bundle' => 'field_farm_quantity',
+      'deleted' => 0,
+      'entity_id' => $fc_id,
+      'revision_id' => $fc_rev_id,
+      'language' => 'und',
+      'delta' => 0,
+      'field_farm_quantity_value_numerator' => $record->field_farm_inventory_value_numerator,
+      'field_farm_quantity_value_denominator' => $record->field_farm_inventory_value_denominator,
+    );
+    db_insert('field_data_field_farm_quantity_value')
+      ->fields($value_fields)
+      ->execute();
+    db_insert('field_revision_field_farm_quantity_value')
+      ->fields($value_fields)
+      ->execute();
+
+    // Create records for the inventory asset.
+    $asset_fields = array(
+      'entity_type' => 'field_collection_item',
+      'bundle' => 'field_farm_quantity',
+      'deleted' => 0,
+      'entity_id' => $fc_id,
+      'revision_id' => $fc_rev_id,
+      'language' => 'und',
+      'delta' => 0,
+      'field_farm_inventory_asset_target_id' => $record->field_farm_inventory_asset_target_id
+    );
+    db_insert('field_data_field_farm_inventory_asset')
+      ->fields($asset_fields)
+      ->execute();
+    db_insert('field_revision_field_farm_inventory_asset')
+      ->fields($asset_fields)
+      ->execute();
+
+    // Create records for the inventory multiplier.
+    $asset_fields = array(
+      'entity_type' => 'field_collection_item',
+      'bundle' => 'field_farm_quantity',
+      'deleted' => 0,
+      'entity_id' => $fc_id,
+      'revision_id' => $fc_rev_id,
+      'language' => 'und',
+      'delta' => 0,
+      'field_farm_inventory_multiplier_value' => -1
+    );
+    db_insert('field_data_field_farm_inventory_multiplier')
+      ->fields($asset_fields)
+      ->execute();
+    db_insert('field_revision_field_farm_inventory_multiplier')
+      ->fields($asset_fields)
+      ->execute();
+
+    // Check to see how many quantity measurements the log has already. This
+    // will be used to determine the delta of the new measurement we are going
+    // to add.
+    $delta = db_query("SELECT COUNT(*) FROM {field_data_field_farm_quantity} WHERE entity_type = 'log' AND entity_id = :entity_id", array(':entity_id' => $record->entity_id))->fetch();
+
+    // Create a record for the {field_data_field_farm_quantity} table.
+    $qty_fields = array(
+      'entity_type' => 'log',
+      'bundle' => $record->bundle,
+      'deleted' => 0,
+      'entity_id' => $record->entity_id,
+      'revision_id' => $record->revision_id,
+      'language' => 'und',
+      'delta' => $delta,
+      'field_farm_quantity_value' => $fc_id,
+      'field_farm_quantity_revision_id' => $fc_rev_id,
+    );
+    db_insert('field_data_field_farm_quantity')
+      ->fields($qty_fields)
+      ->execute();
+    db_insert('field_revision_field_farm_quantity')
+      ->fields($qty_fields)
+      ->execute();
+  }
+}

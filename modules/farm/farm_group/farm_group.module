@@ -718,6 +718,10 @@ function farm_group_members_query($group_id, $time = REQUEST_TIME, $done = TRUE,
   $subquery->addField('ss_fdffa', 'field_farm_asset_target_id');
 
   // Add an expression to extract the assets most recent membership log ID.
+  /**
+   * @todo
+   * Test if this works in PostgreSQL.
+   */
   $subquery->addExpression("SUBSTRING_INDEX(GROUP_CONCAT(ss_log.id ORDER BY ss_log.timestamp DESC, ss_log.id DESC SEPARATOR ','), ',', 1)", 'ss_current_log_id');
 
   // Group by asset ID.

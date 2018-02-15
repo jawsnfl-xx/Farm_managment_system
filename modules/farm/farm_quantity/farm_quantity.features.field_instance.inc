@@ -11,6 +11,38 @@ function farm_quantity_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
+  // 'field_collection_item-field_farm_quantity-field_farm_inventory_multiplier'.
+  $field_instances['field_collection_item-field_farm_quantity-field_farm_inventory_multiplier'] = array(
+    'bundle' => 'field_farm_quantity',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Is this inventory adjustment increasing or decreasing the asset\'s inventory?',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 6,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_farm_inventory_multiplier',
+    'label' => 'Inventory adjustment',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 7,
+    ),
+  );
+
+  // Exported field_instance:
   // 'field_collection_item-field_farm_quantity-field_farm_quantity_label'.
   $field_instances['field_collection_item-field_farm_quantity-field_farm_quantity_label'] = array(
     'bundle' => 'field_farm_quantity',
@@ -157,6 +189,8 @@ function farm_quantity_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Inventory adjustment');
+  t('Is this inventory adjustment increasing or decreasing the asset\'s inventory?');
   t('Label');
   t('Measure');
   t('Optionally give this quantity measurement a label. This helps to differentiate multiple quantities with the same unit and measure that are in the same log.');
