@@ -2,5 +2,5 @@
 
 /**
  * @file
- * farmOS installation profile.
+ * farm_managent_system installation profile.
  */
