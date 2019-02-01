@@ -2,11 +2,11 @@
 
 /**
  * @file
- * farmOS install file.
+ * farm_managent_system install file.
  */
 
 /**
- * Define farmOS modules that will be available to enable during installation.
+ * Define farm_managent_system modules that will be available to enable during installation.
  *
  * @return array
  *   Returns an array with two sub-arrays:
@@ -91,7 +91,7 @@ function farm_install_tasks(&$install_state) {
 }
 
 /**
- * Form callback for farmOS configuration install task.
+ * Form callback for farm_managent_system configuration install task.
  */
 function farm_install_configure_form($form, &$form_state) {
 
