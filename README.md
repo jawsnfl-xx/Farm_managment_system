@@ -1,6 +1,6 @@
 # farm_managment_system
 
-Documentation: https://github.com/jawsnfl/Farm_managment_system/documentation
+Documentation: https://github.com/jawsnfl/Farm_managment_system/Farm%20managment%20system%20user%20guide.pdf
 
 Drupal distribution: 7.x
 
