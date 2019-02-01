@@ -1,8 +1,8 @@
 # farmOS
 
-Documentation: https://farmOS.org
+Documentation: https://github.com/jawscorp/farmOS/documentation
 
-Drupal distribution: http://drupal.org/project/farm
+Drupal distribution: 7.X
 
 A web-based farm record keeping application.
 
@@ -12,29 +12,9 @@ extensible farm management interface.
 
 Drupal.org is the location of the canonical repository and mainline branch.
 GitHub is also used as a mirror, and for some of the more experimental
-development. See http://github.com/farmOS for a list of related repositories.
+development. See https://github.com/jawscorp/farmOS for a list of related repositories.
 
 ## INSTALLATION
 
-For more information on installing farmOS, see the official documentation on
-farmOS.org:
-
-https://farmOS.org/hosting/installing
-
-## MAINTAINERS
-
-Current maintainers:
- * Michael Stenta (m.stenta) - https://drupal.org/user/581414
-
-This project has been sponsored by:
- * [Farmier](http://farmier.com)
- * [Cornell University](http://www.cornell.edu)
- * [Vermont Agency of Agriculture Food & Markets](http://agriculture.vermont.gov)
- * [Vermont Housing & Conservation Board](http://www.vhcb.org)
- * [UVM Extension](https://www.uvm.edu/extension)
- * [Globetrotter Foundation](http://globetrotterfoundation.org)
- * [Vermont Vegetable and Berry Growers Association](http://www.uvm.edu/vtvegandberry)
- * [Pennsylvania Association for Sustainable Agriculture](https://pasafarming.org)
- * [Natural Resources Conservation Service](https://www.nrcs.usda.gov)
- * [The United States Forest Service - International Programs](https://www.fs.fed.us/about-agency/international-programs)
- * [The National Forestry Authority of Uganda](https://www.nfa.org.ug/)
+For more information on installing farmOS, see the official documentation on:
+https://github.com/jawscorp/farmOS/documentation/installing
