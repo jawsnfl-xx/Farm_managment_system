@@ -1,6 +1,6 @@
 # farm_managment_system
 
-Documentation: https://github.com/jawscorp/Farm_managment_system/documentation
+Documentation: https://github.com/jawsnfl/Farm_managment_system/documentation
 
 Drupal distribution: 7.x
 
@@ -12,10 +12,10 @@ extensible farm management interface.
 
 Drupal.org is the location of the canonical repository and mainline branch.
 GitHub is also used as a mirror, and for some of the more experimental
-development. See https://github.com/jawscorp/Farm_managment_system for a list of related repositories.
+development. See https://github.com/jawsnfl/Farm_managment_system for a list of related repositories.
 
 ## INSTALLATION
 
 For more information on installing FMS(farm_managment_system), see the official documentation on:
 
-https://github.com/jawscorp/Farm_managment_system/documentation/installing
+https://github.com/jawsnfl/Farm_managment_system/documentation/installing
